@@ -1,35 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WCAG 2.2 Guidelines for iOS Developers</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
-        h1 { color: #333; }
-        h2 { color: #0066cc; }
-        pre { background-color: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; }
-        code { font-family: 'Courier New', Courier, monospace; }
-    </style>
-</head>
-<body>
-    <h1>WCAG 2.2 Guidelines for iOS Developers</h1>
+## 1. Focus Not Obscured (2.4.11 AA, 2.4.12 AAA)
 
-    <h2>1. Focus Not Obscured (2.4.11 AA, 2.4.12 AAA)</h2>
-    <p>Ensure that the keyboard focus indicator is not hidden by other content.</p>
-    <p><strong>Example:</strong></p>
-    <pre><code>
+Ensure that the keyboard focus indicator is not hidden by other content.
+
+**Example:**
+```swift
 // Adjust scroll view content inset when keyboard appears
 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] notification in
     guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
     self?.scrollView.contentInset.bottom = keyboardFrame.height
 }
-    </code></pre>
 
-    <h2>2. Focus Appearance (2.4.13 AAA)</h2>
-    <p>Make sure the focus indicator is clearly visible and meets minimum area and contrast requirements.</p>
-    <p><strong>Example:</strong></p>
-    <pre><code>
+
+## 2. Focus Appearance (2.4.13 AAA)
+Make sure the focus indicator is clearly visible and meets minimum area and contrast requirements.
+**Example:**
+```swift
+
 extension UIButton {
     func setupAccessibilityFocus() {
         let focusedBackground = UIColor.systemBlue.withAlphaComponent(0.3)
@@ -43,12 +29,12 @@ extension UIButton {
         self.accessibilityTraits.insert(.button)
     }
 }
-    </code></pre>
 
-    <h2>3. Dragging Movements (2.5.7 AA)</h2>
-    <p>Provide alternatives for drag and drop operations.</p>
-    <p><strong>Example:</strong></p>
-    <pre><code>
+## 3. Dragging Movements (2.5.7 AA)
+Provide alternatives for drag and drop operations.
+**Example:**
+```swift
+
 class ReorderableCell: UICollectionViewCell {
     var moveUpButton: UIButton!
     var moveDownButton: UIButton!
@@ -73,12 +59,12 @@ class ReorderableCell: UICollectionViewCell {
         // Implement move down logic
     }
 }
-    </code></pre>
 
-    <h2>4. Target Size (2.5.8 AA)</h2>
-    <p>Ensure interactive elements are at least 24x24 CSS pixels.</p>
-    <p><strong>Example:</strong></p>
-    <pre><code>
+## 4. Target Size (2.5.8 AA)
+Ensure interactive elements are at least 24x24 CSS pixels.
+**Example:**
+```swift
+
 extension UIButton {
     func ensureMinimumSize() {
         let minSize: CGFloat = 44 // 44 points is approximately 24 CSS pixels
@@ -89,12 +75,11 @@ extension UIButton {
         ])
     }
 }
-    </code></pre>
 
-    <h2>5. Consistent Help (3.2.6 A)</h2>
-    <p>Implement a consistent help mechanism across the app.</p>
-    <p><strong>Example:</strong></p>
-    <pre><code>
+## 5. Consistent Help (3.2.6 A)
+Implement a consistent help mechanism across the app.
+**Example:**
+```swift
 class BaseViewController: UIViewController {
     lazy var helpButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(showHelp))
@@ -111,12 +96,11 @@ class BaseViewController: UIViewController {
         present(helpVC, animated: true, completion: nil)
     }
 }
-    </code></pre>
 
-    <h2>6. Redundant Entry (3.3.7 A)</h2>
-    <p>Avoid asking users to re-enter information they've already provided.</p>
-    <p><strong>Example:</strong></p>
-    <pre><code>
+## 6. Redundant Entry (3.3.7 A)
+Avoid asking users to re-enter information they've already provided.
+**Example:**
+```swift
 class RegistrationManager {
     static let shared = RegistrationManager()
     
@@ -143,12 +127,12 @@ class AddressViewController: UIViewController {
         }
     }
 }
-    </code></pre>
 
-    <h2>7. Accessible Authentication (3.3.8 AA, 3.3.9 AAA)</h2>
-    <p>Provide alternatives to cognitive function tests for authentication.</p>
-    <p><strong>Example:</strong></p>
-    <pre><code>
+## 6. Accessible Authentication (3.3.8 AA, 3.3.9 AAA)
+Provide alternatives to cognitive function tests for authentication.
+**Example:**
+```swift
+
 import LocalAuthentication
 
 class AuthenticationManager {
@@ -172,8 +156,3 @@ class AuthenticationManager {
         // Implement password/PIN entry UI
     }
 }
-    </code></pre>
-
-    <p>These examples demonstrate how iOS developers can implement WCAG 2.2 guidelines in their applications. Remember to test these implementations thoroughly with various assistive technologies and user scenarios to ensure they meet accessibility requirements.</p>
-</body>
-</html>
